@@ -1,0 +1,88 @@
+@import './reset.css';
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 0 40px;
+  font-size: 16px;
+}
+
+form.hide {
+  display: none;
+}
+
+.main-container {
+  display: flex;
+  width: auto;
+  padding: 15px;
+  gap: 28px;
+  border: dotted 2px rgb(68, 63, 63);
+}
+
+.forms-container {
+  width: 20em;
+  padding: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  position: relative;
+  background-color: #464db4;
+  color: #fff;
+  text-decoration: underline;
+}
+form label {
+  line-height: 20px;
+}
+form input {
+  line-height: 24px;
+  cursor: pointer;
+}
+.btn {
+  background-color: #fff;
+  padding: 10px;
+  cursor: pointer;
+}
+.info-wrapper {
+  display: flex;
+  width: 60%;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+}
+nav {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 10px;
+}
+nav a {
+  border: 2px solid rgb(71, 21, 117);
+  padding: 5px;
+  line-height: 18px;
+  text-decoration: none;
+  background-color: blueviolet;
+  color: #fff;
+}
+.table-wrapper {
+  width: 100%;
+}
+table {
+  width: 100%;
+  text-align: center;
+  border: 1px solid rgb(68, 63, 63);
+  background-color: rgb(170, 253, 226);
+}
+
+tr,
+th,
+td {
+  border: 1px solid rgb(68, 63, 63);
+  padding: 5px;
+}

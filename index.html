@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autos app, TypeScript</title>
+    <link rel="stylesheet" href="./css/home.css">
+    <script src="./js/index.js" defer></script>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="forms-container">
+            <form class="add-form show">
+
+                <label for="model-input">Modelis</label>
+                <input id="model-input" type="text">
+
+
+                <label for="date-input">Pagaminimo data</label>
+                <input id="date-input" type="date" min="2010-01-01">
+
+
+                <label for="color-input">Spalva</label>
+                <input id="color-input" type="color">
+
+
+                <label for="gas">Kuro tipas</label>
+                <select id="gas" name="gas">
+                    <option value="Benzinas">Benzinas</option>
+                    <option value="Dyzelinas">Dyzelinas</option>
+                    <option value="Elektra">Elektra</option>
+                </select>
+
+                <input type="button" class="btn" id="btn-add" value="Prideti"></input>
+
+            </form>
+
+            <form class="update-form hide">
+                <label for="model-input">Modelis</label>
+                <input id="model-input" type="text">
+
+
+                <label for="date-input">Pagaminimo data</label>
+                <input id="date-input" type="date" min="2010-01-01">
+
+
+                <label for="color-input">Spalva</label>
+                <input id="color-input" type="color">
+
+
+                <label for="gas">Kuro tipas</label>
+                <select id="gas" name="gas">
+                    <option value="Benzinas">Benzinas</option>
+                    <option value="Dyzelinas">Dyzelinas</option>
+                    <option value="Elektra">Elektra</option>
+                </select>
+
+                <input type="button" class="btn" id="btn-add" value="Atnaujinti"></input>
+            </form>
+        </div>
+    </div>
+
+    <div class="info-wrapper">
+        <nav>
+            <a href="#" class="all-auto">Visi automobiliai</a>
+            <a href="#" class="dyzel-auto">Dyzeliniai</a>
+            <a href="#" class="benz-auto">Benzininiai</a>
+            <a href="#" class="ev-auto">Elektromobiliai</a>
+        </nav>
+
+        <div class="table-wrapper">
+            <table class="output-table">
+                <tr>
+                    <th>Modelis</th>
+                    <th>Pagaminimo data</th>
+                    <th>Spalva</th>
+                    <th>Kuro tipas</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>Audi Q8</td>
+                    <td>2015</td>
+                    <td>Black</td>
+                    <td>Benzinas</td>
+                    <td>Edit</td>
+                    <td>Delete</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</body>
+
+</html>
