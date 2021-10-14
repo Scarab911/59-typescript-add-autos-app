@@ -15,50 +15,47 @@
         <div class="forms-container">
             <form class="add-form show">
 
-                <label for="model-input">Modelis</label>
-                <input id="model-input" type="text">
+                <label for="model">Modelis</label>
+                <input id="model" type="text">
 
+                <label for="date">Pagaminimo data</label>
+                <input id="date" type="date" min="2010-01-01">
 
-                <label for="date-input">Pagaminimo data</label>
-                <input id="date-input" type="date" min="2010-01-01">
+                <label for="color">Spalva</label>
+                <input id="color" type="text">
 
-
-                <label for="color-input">Spalva</label>
-                <input id="color-input" type="text">
-
-
-                <label for="gas">Kuro tipas</label>
-                <select id="gas" name="gas">
+                <label for="fuel">Kuro tipas</label>
+                <select id="fuel" name="fuel">
                     <option value="Benzinas">Benzinas</option>
                     <option value="Dyzelinas">Dyzelinas</option>
                     <option value="Elektra">Elektra</option>
                 </select>
 
-                <input type="button" class="btn" id="btn-add" value="Prideti"></input>
+                <input type="button" class="btn" id="btn_add" value="Prideti"></input>
 
             </form>
 
             <form class="update-form hide">
-                <label for="model-input">Modelis</label>
-                <input id="model-input" type="text">
+                <label for="model">Modelis</label>
+                <input id="model" type="text">
 
 
-                <label for="date-input">Pagaminimo data</label>
-                <input id="date-input" type="date" min="2010-01-01">
+                <label for="date">Pagaminimo data</label>
+                <input id="date" type="date" min="2010-01-01">
 
 
-                <label for="color-input">Spalva</label>
-                <input id="color-input" type="color">
+                <label for="color">Spalva</label>
+                <input id="color" type="color">
 
 
-                <label for="gas">Kuro tipas</label>
-                <select id="gas" name="gas">
+                <label for="fuel">Kuro tipas</label>
+                <select id="fuel" name="fuel">
                     <option value="Benzinas">Benzinas</option>
                     <option value="Dyzelinas">Dyzelinas</option>
                     <option value="Elektra">Elektra</option>
                 </select>
 
-                <input type="button" class="btn" id="btn-add" value="Atnaujinti"></input>
+                <input type="button" id="add-btn" class="btn" id="btn-add" value="Atnaujinti"></input>
             </form>
         </div>
 
@@ -72,7 +69,7 @@
 
             <div class="table-wrapper">
                 <table class="output-table">
-                    <tr>
+                    <tr class="table-row">
                         <th>Modelis</th>
                         <th>Pagaminimo data</th>
                         <th>Spalva</th>
@@ -80,7 +77,7 @@
                         <th></th>
                         <th></th>
                     </tr>
-                    <tr>
+                    <tr class="table-row">
                         <td>Audi Q8</td>
                         <td>2015</td>
                         <td>Black</td>
