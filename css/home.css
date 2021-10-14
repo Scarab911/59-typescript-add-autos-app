@@ -1,4 +1,5 @@
 @import './reset.css';
+@import './variables.css';
 
 body {
   display: flex;
@@ -7,6 +8,8 @@ body {
   height: 100vh;
   padding: 0 40px;
   font-size: 16px;
+  background-color: var(--clr-main);
+  font-weight: 700;
 }
 
 form.hide {
@@ -18,7 +21,7 @@ form.hide {
   width: auto;
   padding: 15px;
   gap: 28px;
-  border: dotted 2px rgb(68, 63, 63);
+  border: dotted 2px var(--clr-secondary);
 }
 
 .forms-container {
@@ -32,27 +35,30 @@ form {
   gap: 10px;
   padding: 10px;
   position: relative;
-  background-color: #464db4;
-  color: #fff;
+  background-color: var(--clr-white);
+  color: var(--clr-secondary);
   text-decoration: underline;
 }
 form label {
   line-height: 20px;
+  color: var(--clr-secondary);
 }
 form input {
   line-height: 24px;
   cursor: pointer;
 }
 .btn {
-  background-color: #fff;
+  background-color: var(--clr-secondary);
   padding: 10px;
   cursor: pointer;
+  color: var(--clr-white);
+  font-weight: 900;
 }
 .info-wrapper {
   display: flex;
   width: 60%;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   gap: 10px;
   padding: 10px;
 }
@@ -63,12 +69,16 @@ nav {
   gap: 10px;
 }
 nav a {
-  border: 2px solid rgb(71, 21, 117);
+  border: 2px solid var(--clr-white);
   padding: 5px;
   line-height: 18px;
   text-decoration: none;
-  background-color: blueviolet;
-  color: #fff;
+  background-color: var(--clr-white);
+  color: var(--clr-secondary);
+}
+nav a:hover {
+  background-color: var(--clr-secondary);
+  color: var(--clr-white);
 }
 .table-wrapper {
   width: 100%;
@@ -85,4 +95,14 @@ th,
 td {
   border: 1px solid rgb(68, 63, 63);
   padding: 5px;
+}
+
+td {
+  background-color: var(--clr-table);
+  color: var(--clr-secondary);
+}
+
+th {
+  background-color: var(--clr-white);
+  color: var(--clr-secondary);
 }
