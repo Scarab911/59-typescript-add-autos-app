@@ -9,49 +9,49 @@ const UI = {
     tableRow: document.querySelector('.table-row'),
 }
 
+//apsirasom galimus kuro variantus
+enum FuelType {
+    Benzinas = 'benzinas',
+    Dyzelinas = 'dyzelinas',
+    Elektra = 'elektra'
+}
+
 class CarPark{
     //ad cars to list
     addCar(car: Car): void {
         autosList.push(car);
     }
 
-    whatIsThisFuel(fuel: string): KuroTipas {
-        let thisFuel: KuroTipas = KuroTipas.Benzinas;
+    whatIsThisFuel(fuel: string): FuelType {
+        let thisFuel: FuelType = FuelType.Benzinas;
 
-        if (fuel === 'benzinas') {
-            thisFuel = KuroTipas.Benzinas;
+        if (fuel === 'Benzinas') {
+            thisFuel = FuelType.Benzinas;
             console.log('priskyrem benzina');
-            
         }
 
-        if (fuel === 'dyzelinas') {
-            thisFuel = KuroTipas.Dyzelinas;
+        if (fuel === 'Dyzelinas') {
+            thisFuel = FuelType.Dyzelinas;
             console.log('priskyrem dyzeliuka');
         } 
         
-        if (fuel === 'elektra') {
-            thisFuel = KuroTipas.Elektra;
+        if (fuel === 'Elektra') {
+            thisFuel = FuelType.Elektra;
              console.log('priskyrem dyzeliuka');
         }
         return thisFuel
     }
 }
 
-//apsirasom galimus kuro variantus
-enum KuroTipas {
-    Benzinas = 'benzinas',
-    Dyzelinas = 'dyzelinas',
-    Elektra = 'elektra'
-}
 
 //sukuriam automibiliu objekta
 class Car {
     public readonly model: string;
     public readonly date: Date;
     public readonly color: string;
-    public readonly fuel: KuroTipas;
+    public readonly fuel: FuelType;
 
-    constructor(model: string, date: Date, color: string, fuel: KuroTipas){
+    constructor(model: string, date: Date, color: string, fuel: FuelType){
                 this.model = model,
                 this.date = date,
                 this.color = color,
@@ -64,6 +64,8 @@ const autosList: Car[] = [];
 // sukuriam nauja auto parka
 const srotas = new CarPark;
 // srotas.addCar(new Car('Audi Q7', new Date(),'White', KuroTipas.benzinas))
+console.log(FuelType.Benzinas);
+console.log(FuelType.Elektra);
 
 //uzdedam eventa formos ivedimo mygtukui
 UI.addButton?.addEventListener('click', () => {
@@ -72,17 +74,10 @@ UI.addButton?.addEventListener('click', () => {
     const color = UI.colorInput.value;
     const fuel = UI.fuelInput.value;
 
+    //susirandam kuro tipa arba panaudojam castinima as KuroTipas
     const thisFuel = srotas.whatIsThisFuel(fuel);
 
-
-    
-  
-  
-    console.log(fuel);
-    console.log(thisFuel);
-    
     srotas.addCar(new Car(model, new Date(date), color, thisFuel))
 
     console.log(autosList);
-    
 });
