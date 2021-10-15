@@ -24,15 +24,12 @@ class CarPark {
         let thisFuel = FuelType.Benzinas;
         if (fuel === 'Benzinas') {
             thisFuel = FuelType.Benzinas;
-            console.log('priskyrem benzina');
         }
         if (fuel === 'Dyzelinas') {
             thisFuel = FuelType.Dyzelinas;
-            console.log('priskyrem dyzeliuka');
         }
         if (fuel === 'Elektra') {
             thisFuel = FuelType.Elektra;
-            console.log('priskyrem dyzeliuka');
         }
         return thisFuel;
     }
@@ -45,13 +42,41 @@ class Car {
             this.color = color,
             this.fuel = fuel;
     }
+    printCarToHTML(element) {
+        const stringyfiedDate = JSON.stringify(this.date);
+        const apkarpytas = stringyfiedDate.substring(1, stringyfiedDate.length - 1);
+        const formatedDate = formatDate(apkarpytas);
+        console.log(this.date);
+        console.log(stringyfiedDate);
+        console.log(apkarpytas);
+        console.log(formatedDate);
+        let HTML = '';
+        HTML += `<tr class="table-row">
+                        <td>${this.model}</td>
+                        <td>${formatedDate}</td>
+                        <td>${this.color}</td>
+                        <td>${this.fuel}</td>
+                        <td><img src="./img/edit.png" alt="edit"></td>
+                        <td><img src="./img/delet.png" alt="delete"></td>
+                    </tr>`;
+        element.insertAdjacentHTML('afterend', HTML);
+    }
 }
-const autosList = [];
+/*HELPERS FUNCTIONS*/
+function formatDate(date) {
+    const d = new Date(date);
+    const dformat = [d.getFullYear(), d.getMonth() + 1, d.getDate()].join('-');
+    return dformat;
+}
+function renderHTML(element) {
+    for (const car of autosList) {
+        car.printCarToHTML(element);
+    }
+}
+/*EXECUTION BELOW*/
 // sukuriam nauja auto parka
 const srotas = new CarPark;
-// srotas.addCar(new Car('Audi Q7', new Date(),'White', KuroTipas.benzinas))
-console.log(FuelType.Benzinas);
-console.log(FuelType.Elektra);
+const autosList = [];
 //uzdedam eventa formos ivedimo mygtukui
 (_a = UI.addButton) === null || _a === void 0 ? void 0 : _a.addEventListener('click', () => {
     const model = UI.modelInput.value;
@@ -60,6 +85,9 @@ console.log(FuelType.Elektra);
     const fuel = UI.fuelInput.value;
     //susirandam kuro tipa arba panaudojam castinima as KuroTipas
     const thisFuel = srotas.whatIsThisFuel(fuel);
-    srotas.addCar(new Car(model, new Date(date), color, thisFuel));
-    console.log(autosList);
+    //pridedam automobili i list
+    const car = new Car(model, new Date(date), color, thisFuel);
+    srotas.addCar(car);
+    //ipiesiam nauja auto i HTML lentele
+    car.printCarToHTML(UI.tableRow);
 });

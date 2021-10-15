@@ -6,7 +6,7 @@ const UI = {
 
     addButton: document.getElementById('btn_add'),
 
-    tableRow: document.querySelector('.table-row'),
+    tableRow: document.querySelector('.table-row') as HTMLTableRowElement,
 }
 
 //apsirasom galimus kuro variantus
@@ -27,17 +27,14 @@ class CarPark{
 
         if (fuel === 'Benzinas') {
             thisFuel = FuelType.Benzinas;
-            console.log('priskyrem benzina');
         }
 
         if (fuel === 'Dyzelinas') {
             thisFuel = FuelType.Dyzelinas;
-            console.log('priskyrem dyzeliuka');
         } 
         
         if (fuel === 'Elektra') {
             thisFuel = FuelType.Elektra;
-             console.log('priskyrem dyzeliuka');
         }
         return thisFuel
     }
@@ -57,18 +54,53 @@ class Car {
                 this.color = color,
                 this.fuel = fuel
     }
+
+    printCarToHTML(element: HTMLTableRowElement): void {
+        const stringyfiedDate = JSON.stringify(this.date);
+        const apkarpytas = stringyfiedDate.substring(1, stringyfiedDate.length-1)
+        const formatedDate = formatDate(apkarpytas);
+        
+        console.log(this.date);
+        console.log(stringyfiedDate);
+        console.log(apkarpytas);
+        console.log(formatedDate);
+
+        let HTML ='';
+        HTML += `<tr class="table-row">
+                        <td>${this.model}</td>
+                        <td>${formatedDate}</td>
+                        <td>${this.color}</td>
+                        <td>${this.fuel}</td>
+                        <td><img src="./img/edit.png" alt="edit"></td>
+                        <td><img src="./img/delet.png" alt="delete"></td>
+                    </tr>`;
+
+        element.insertAdjacentHTML('afterend', HTML);
+    }
 }
 
-const autosList: Car[] = [];
+/*HELPERS FUNCTIONS*/
+function formatDate (date:string) {
+    const d = new Date(date);
+    const dformat = [d.getFullYear(), d.getMonth() + 1, d.getDate()].join('-');
+    return dformat;
+}
+
+function renderHTML(element:HTMLTableRowElement) {
+     for(const car of autosList){
+        car.printCarToHTML(element);
+    }
+}
+
+/*EXECUTION BELOW*/
 
 // sukuriam nauja auto parka
 const srotas = new CarPark;
-// srotas.addCar(new Car('Audi Q7', new Date(),'White', KuroTipas.benzinas))
-console.log(FuelType.Benzinas);
-console.log(FuelType.Elektra);
+const autosList: Car[] = [];
 
 //uzdedam eventa formos ivedimo mygtukui
 UI.addButton?.addEventListener('click', () => {
+
     const model = UI.modelInput.value;
     const date = UI.dateInput.value;
     const color = UI.colorInput.value;
@@ -77,7 +109,10 @@ UI.addButton?.addEventListener('click', () => {
     //susirandam kuro tipa arba panaudojam castinima as KuroTipas
     const thisFuel = srotas.whatIsThisFuel(fuel);
 
-    srotas.addCar(new Car(model, new Date(date), color, thisFuel))
+    //pridedam automobili i list
+    const car = new Car(model, new Date(date), color, thisFuel);
+    srotas.addCar(car)
 
-    console.log(autosList);
+    //ipiesiam nauja auto i HTML lentele
+    car.printCarToHTML(UI.tableRow);
 });
