@@ -115,4 +115,13 @@ UI.addButton?.addEventListener('click', () => {
 
     //ipiesiam nauja auto i HTML lentele
     car.printCarToHTML(UI.tableRow);
+
+    //ikeliam sukurtus auto i LOCAL Storage:
+    saveCar();
 });
+
+function saveCar(): void {
+    const carsString = JSON.stringify(autosList);
+
+    window.localStorage.setItem('CARS_LOCAL_STORAGE_KEY',carsString)
+}

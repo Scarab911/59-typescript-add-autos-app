@@ -90,4 +90,10 @@ const autosList = [];
     srotas.addCar(car);
     //ipiesiam nauja auto i HTML lentele
     car.printCarToHTML(UI.tableRow);
+    //ikeliam sukurtus auto i LOCAL Storage:
+    saveCar();
 });
+function saveCar() {
+    const carsString = JSON.stringify(autosList);
+    window.localStorage.setItem('CARS_LOCAL_STORAGE_KEY', carsString);
+}
