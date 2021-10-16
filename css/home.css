@@ -35,7 +35,6 @@ form {
   min-width: 300px;
   gap: 10px;
   padding: 25px 10px;
-  position: relative;
   background-color: var(--clr-white);
   color: var(--clr-secondary);
   border-radius: 5px;
@@ -145,6 +144,7 @@ th {
 
 @media (max-width: 880px) {
   body {
+    padding: 0 10px;
     height: auto;
   }
   .main-container {
@@ -184,7 +184,7 @@ th {
     content: attr(data-label);
     position: absolute;
     top: 5px;
-    left: 15px;
+    left: 8px;
     text-transform: lowercase;
     text-transform: capitalize;
     color: var(--clr-secondary);

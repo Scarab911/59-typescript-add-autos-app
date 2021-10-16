@@ -46,10 +46,6 @@ class Car {
         const stringyfiedDate = JSON.stringify(this.date);
         const apkarpytas = stringyfiedDate.substring(1, stringyfiedDate.length - 1);
         const formatedDate = formatDate(apkarpytas);
-        console.log(this.date);
-        console.log(stringyfiedDate);
-        console.log(apkarpytas);
-        console.log(formatedDate);
         let HTML = '';
         HTML += `<tr class="table-row">
                         <td data-label="Modelis">${this.model}</td>

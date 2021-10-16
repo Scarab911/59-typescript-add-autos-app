@@ -56,16 +56,11 @@ class Car {
     }
 
     printCarToHTML(element: HTMLTableRowElement): void {
-        const stringyfiedDate = JSON.stringify(this.date);
-        const apkarpytas = stringyfiedDate.substring(1, stringyfiedDate.length-1)
-        const formatedDate = formatDate(apkarpytas);
-        
-        console.log(this.date);
-        console.log(stringyfiedDate);
-        console.log(apkarpytas);
-        console.log(formatedDate);
+        const stringyfiedDate: string = JSON.stringify(this.date);
+        const apkarpytas: string = stringyfiedDate.substring(1, stringyfiedDate.length-1)
+        const formatedDate: string = formatDate(apkarpytas);
 
-        let HTML ='';
+        let HTML: string ='';
         HTML += `<tr class="table-row">
                         <td data-label="Modelis">${this.model}</td>
                         <td data-label="Pagaminimo data">${formatedDate}</td>
@@ -80,13 +75,13 @@ class Car {
 }
 
 /*HELPERS FUNCTIONS*/
-function formatDate (date:string) {
+function formatDate (date:string): string {
     const d = new Date(date);
     const dformat = [d.getFullYear(), d.getMonth() + 1, d.getDate()].join('-');
     return dformat;
 }
 
-function renderHTML(element:HTMLTableRowElement) {
+function renderHTML(element:HTMLTableRowElement): void {
      for(const car of autosList){
         car.printCarToHTML(element);
     }
