@@ -67,10 +67,10 @@ class Car {
 
         let HTML ='';
         HTML += `<tr class="table-row">
-                        <td>${this.model}</td>
-                        <td>${formatedDate}</td>
-                        <td>${this.color}</td>
-                        <td>${this.fuel}</td>
+                        <td data-label="Modelis">${this.model}</td>
+                        <td data-label="Pagaminimo data">${formatedDate}</td>
+                        <td data-label="Spalva">${this.color}</td>
+                        <td data-label="Kuro tipas">${this.fuel}</td>
                         <td><img src="./img/edit.png" alt="edit"></td>
                         <td><img src="./img/delet.png" alt="delete"></td>
                     </tr>`;
