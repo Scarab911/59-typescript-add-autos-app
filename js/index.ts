@@ -25,15 +25,15 @@ class CarPark{
     whatIsThisFuel(fuel: string): FuelType {
         let thisFuel: FuelType = FuelType.Benzinas;
 
-        if (fuel === 'Benzinas') {
+        if (fuel === '0') {
             thisFuel = FuelType.Benzinas;
         }
 
-        if (fuel === 'Dyzelinas') {
+        if (fuel === '1') {
             thisFuel = FuelType.Dyzelinas;
         } 
         
-        if (fuel === 'Elektra') {
+        if (fuel === '2') {
             thisFuel = FuelType.Elektra;
         }
         return thisFuel
@@ -81,10 +81,19 @@ function formatDate (date:string): string {
     return dformat;
 }
 
+//render HTML from Array of objects
 function renderHTML(element:HTMLTableRowElement): void {
      for(const car of autosList){
         car.printCarToHTML(element);
     }
+}
+
+const CARS_LOCAL_STORAGE_KEY = 'Cars';
+//Saves info into LocalStorage
+function saveCar(): void {
+    const carsString = JSON.stringify(autosList);
+
+    window.localStorage.setItem(CARS_LOCAL_STORAGE_KEY,carsString)
 }
 
 /*EXECUTION BELOW*/
@@ -115,8 +124,3 @@ UI.addButton?.addEventListener('click', () => {
     saveCar();
 });
 
-function saveCar(): void {
-    const carsString = JSON.stringify(autosList);
-
-    window.localStorage.setItem('CARS_LOCAL_STORAGE_KEY',carsString)
-}
