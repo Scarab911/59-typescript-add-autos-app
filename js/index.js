@@ -108,7 +108,6 @@ function toggleForms(id) {
     (_a = UI.addForm) === null || _a === void 0 ? void 0 : _a.classList.toggle('show');
     (_b = UI.updateForm) === null || _b === void 0 ? void 0 : _b.classList.toggle('show');
     editableId = id;
-    console.log('editinam:', editableId);
 }
 //remove entry from table
 function deleteEntry(id) {
@@ -122,15 +121,11 @@ function loadTableEntries() {
     if (!localCarsList)
         return;
     const parsedCarsList = JSON.parse(localCarsList);
-    console.log('istraukiam is local storage');
-    console.log(localCarsList);
-    console.log(parsedCarsList);
     id = 0;
     for (const car of parsedCarsList) {
         const newCar = new Car(car.model, new Date(car.date), car.color, car.fuel, ++id);
         autosList.push(newCar);
     }
-    console.log(autosList);
     renderEntries(UI.tableBody);
 }
 //filtruojam pagal kuro tipa
@@ -153,7 +148,6 @@ let id = 0;
     //pridedam automobili i list
     const car = new Car(model, new Date(date), color, fuel, ++id);
     srotas.addCar(car);
-    console.log(autosList);
     //ipiesiam nauja auto i HTML lentele
     renderEntries(UI.tableBody);
     //ikeliam sukurtus auto i LOCAL Storage:

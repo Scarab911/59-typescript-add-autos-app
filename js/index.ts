@@ -141,8 +141,6 @@ function toggleForms(id?: number): void {
     UI.addForm?.classList.toggle('show');
     UI.updateForm?.classList.toggle('show');
     editableId = id;
-    console.log('editinam:', editableId);
-    
 }
 
 //remove entry from table
@@ -161,10 +159,7 @@ function loadTableEntries(): void {
         return
         
     const parsedCarsList: CarJSON[] = JSON.parse(localCarsList)
-    
-    console.log('istraukiam is local storage');
-    console.log(localCarsList);
-    console.log(parsedCarsList);
+
     id = 0;
 
     for(const car of parsedCarsList){
@@ -172,8 +167,6 @@ function loadTableEntries(): void {
 
          autosList.push(newCar);
     }
-
-    console.log(autosList);
 
     renderEntries(UI.tableBody)
 }
@@ -203,7 +196,6 @@ UI.addButton?.addEventListener('click', () => {
     //pridedam automobili i list
     const car = new Car(model, new Date(date), color, fuel as FuelType, ++id);
     srotas.addCar(car)
-    console.log(autosList);
 
     //ipiesiam nauja auto i HTML lentele
     renderEntries(UI.tableBody);
