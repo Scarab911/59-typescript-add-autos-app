@@ -141,16 +141,22 @@ function loadTableEntries(): void {
     if(!localCarsList)
         return
         
-    const parsedCarsList: CarJSON = JSON.parse(localCarsList)
+    const parsedCarsList: CarJSON[] = JSON.parse(localCarsList)
     
     console.log('istraukiam is local storage');
     console.log(localCarsList);
     console.log(parsedCarsList);
+    id = 0;
 
     for(const car of parsedCarsList){
+        const newCar = new Car(car.model, new Date(car.date), car.color, car.fuel as FuelType, ++id);
 
+         autosList.push(newCar);
     }
 
+    console.log(autosList);
+
+    renderEntries(UI.tableBody)
 }
 
 /*EXECUTION BELOW*/

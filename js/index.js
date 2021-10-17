@@ -109,8 +109,13 @@ function loadTableEntries() {
     console.log('istraukiam is local storage');
     console.log(localCarsList);
     console.log(parsedCarsList);
+    id = 0;
     for (const car of parsedCarsList) {
+        const newCar = new Car(car.model, new Date(car.date), car.color, car.fuel, ++id);
+        autosList.push(newCar);
     }
+    console.log(autosList);
+    renderEntries(UI.tableBody);
 }
 /*EXECUTION BELOW*/
 // sukuriam nauja auto parka
