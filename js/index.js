@@ -1,17 +1,25 @@
 "use strict";
 var _a, _b;
 const UI = {
+    //inputs
     modelInput: document.getElementById('model'),
     dateInput: document.getElementById('date'),
     colorInput: document.getElementById('color'),
     fuelInput: document.getElementById('fuel'),
+    //input and edit buttons
     addButton: document.getElementById('btn_add'),
     editButton: document.getElementById('editPick'),
     deleteButton: document.getElementById('deletePick'),
     updateButton: document.getElementById('update-btn'),
+    //forms adn tables
     tableBody: document.getElementById('table-body'),
     updateForm: document.getElementById('update-form'),
-    addForm: document.getElementById('add-form')
+    addForm: document.getElementById('add-form'),
+    //filter buttons
+    showAllBtn: document.getElementById('show-all'),
+    showDyzelBtn: document.getElementById('show-dyzel'),
+    showBenzBtn: document.getElementById('show-benz'),
+    showEvBtn: document.getElementById('show-ev'),
 };
 //apsirasom galimus kuro variantus
 var FuelType;
@@ -76,10 +84,15 @@ function formatDate(date) {
     return dformat;
 }
 //render HTML from Array of objects
-function renderEntries(element) {
+function renderEntries(element, fuel) {
     element.innerHTML = '';
     for (const car of autosList) {
-        car.printCarToHTML(element);
+        if (fuel === '') {
+            car.printCarToHTML(element);
+        }
+        if (car.fuel == fuel || fuel === undefined) {
+            car.printCarToHTML(element);
+        }
     }
 }
 //Saves info into LocalStorage
@@ -117,6 +130,10 @@ function loadTableEntries() {
     console.log(autosList);
     renderEntries(UI.tableBody);
 }
+//filtruojam pagal kuro tipa
+function filter(type) {
+    renderEntries(UI.tableBody, type);
+}
 /*EXECUTION BELOW*/
 // sukuriam nauja auto parka
 const srotas = new CarPark;
@@ -131,7 +148,7 @@ let id = 0;
     //susirandam kuro tipa arba panaudojam castinima as KuroTipas
     const thisFuel = srotas.whatIsThisFuel(fuel);
     //pridedam automobili i list
-    const car = new Car(model, new Date(date), color, thisFuel, ++id);
+    const car = new Car(model, new Date(date), color, fuel, ++id);
     srotas.addCar(car);
     console.log(autosList);
     //ipiesiam nauja auto i HTML lentele

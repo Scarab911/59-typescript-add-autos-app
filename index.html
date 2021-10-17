@@ -57,12 +57,13 @@
             </form>
         </div>
 
+
         <div class="info-wrapper">
             <nav>
-                <a href="#" class="all-auto">Visi automobiliai</a>
-                <a href="#" class="dyzel-auto">Dyzeliniai</a>
-                <a href="#" class="benz-auto">Benzininiai</a>
-                <a href="#" class="ev-auto">Elektromobiliai</a>
+                <a href="#" id="show-all" class="all-auto" onclick="filter('')">Visi automobiliai</a>
+                <a href="#" id="show-dyzel" class="dyzel-auto" onclick="filter('Dyzelinas')">Dyzeliniai</a>
+                <a href="#" id="show-benz" class="benz-auto" onclick="filter('Benzinas')">Benzininiai</a>
+                <a href="#" id="show-ev" class="ev-auto" onclick="filter('Elektra')">Elektromobiliai</a>
             </nav>
 
             <div class="table-wrapper">

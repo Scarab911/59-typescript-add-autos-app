@@ -1,17 +1,26 @@
 const UI = {
+    //inputs
     modelInput: document.getElementById('model') as HTMLInputElement,
     dateInput: document.getElementById('date') as HTMLInputElement,
     colorInput: document.getElementById('color') as HTMLInputElement,
     fuelInput: document.getElementById('fuel') as HTMLInputElement,
 
+    //input and edit buttons
     addButton: document.getElementById('btn_add'),
     editButton: document.getElementById('editPick') as HTMLImageElement,
     deleteButton: document.getElementById('deletePick') as HTMLImageElement,
     updateButton: document.getElementById('update-btn'),
 
+    //forms adn tables
     tableBody: document.getElementById('table-body') as HTMLTableElement,
     updateForm: document.getElementById('update-form'),
-    addForm: document.getElementById('add-form')
+    addForm: document.getElementById('add-form'),
+
+    //filter buttons
+    showAllBtn: document.getElementById('show-all'),
+    showDyzelBtn: document.getElementById('show-dyzel'),
+    showBenzBtn: document.getElementById('show-benz'),
+    showEvBtn: document.getElementById('show-ev'),
 }
 
 //apsirasom galimus kuro variantus
@@ -103,11 +112,16 @@ function formatDate (date:string): string {
 }
 
 //render HTML from Array of objects
-function renderEntries(element:HTMLTableElement): void {
+function renderEntries(element:HTMLTableElement, fuel?: string): void {
     element.innerHTML = '';
 
     for(const car of autosList){
-        car.printCarToHTML(element);
+        if (fuel === '') {
+            car.printCarToHTML(element);
+        }
+        if (car.fuel == fuel || fuel ===  undefined) {
+            car.printCarToHTML(element);
+        } 
     }
 }
 
@@ -159,6 +173,11 @@ function loadTableEntries(): void {
     renderEntries(UI.tableBody)
 }
 
+//filtruojam pagal kuro tipa
+function filter(type:string){
+    renderEntries(UI.tableBody,type);   
+}
+
 /*EXECUTION BELOW*/
 
 // sukuriam nauja auto parka
@@ -177,7 +196,7 @@ UI.addButton?.addEventListener('click', () => {
     const thisFuel = srotas.whatIsThisFuel(fuel);
 
     //pridedam automobili i list
-    const car = new Car(model, new Date(date), color, thisFuel, ++id);
+    const car = new Car(model, new Date(date), color, fuel as FuelType, ++id);
     srotas.addCar(car)
     console.log(autosList);
 
@@ -194,3 +213,4 @@ UI.updateButton?.addEventListener('click', () => {
 })
 
 loadTableEntries();
+
