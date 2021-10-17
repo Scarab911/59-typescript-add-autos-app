@@ -57,11 +57,11 @@ class CarPark{
 
 //sukuriam automibiliu objekta
 class Car {
-    public readonly model: string;
-    public readonly date: Date;
-    public readonly color: string;
-    public readonly fuel: FuelType;
-    public readonly _id: number;
+    public model: string;
+    public date: Date;
+    public color: string;
+    public fuel: FuelType;
+    public _id: number;
 
     constructor(model: string, date: Date, color: string, fuel: FuelType, id: number){
                 this.model = model,
@@ -135,9 +135,14 @@ function saveCarToLocalStorage(): void {
 }
 
 //togles between two forms:
-function toggleForms(): void {
+let editableId: number | undefined = 0;
+
+function toggleForms(id?: number): void {
     UI.addForm?.classList.toggle('show');
     UI.updateForm?.classList.toggle('show');
+    editableId = id;
+    console.log('editinam:', editableId);
+    
 }
 
 //remove entry from table
@@ -209,7 +214,27 @@ UI.addButton?.addEventListener('click', () => {
 
 //Uzdedam Event formos atnaujinimo mygtukui
 UI.updateButton?.addEventListener('click', () => {
-    toggleForms()
+   const modelUpdateInput = document.getElementById('update-model') as HTMLInputElement;
+   const dateUpdateInput = document.getElementById('update-date') as HTMLInputElement;
+   const colorUpdateInput = document.getElementById('update-color') as HTMLInputElement;
+   const fuelUpdateInput = document.getElementById('update-fuel') as HTMLInputElement;
+
+    for(const car of autosList){
+        if(car.id === editableId) {
+           modelUpdateInput.value === ''? car.model: car.model = modelUpdateInput.value;
+           dateUpdateInput.value === ''? car.date: car.date = new Date(dateUpdateInput.value);
+           colorUpdateInput.value === ''? car.color: car.color = colorUpdateInput.value;
+           fuelUpdateInput.value === ''? car.fuel: car.fuel = fuelUpdateInput.value as FuelType;
+        }
+    }
+
+    //ikeliam sukurtus auto i LOCAL Storage:
+    saveCarToLocalStorage();
+
+    //ipiesiam nauja auto i HTML lentele
+    renderEntries(UI.tableBody);
+
+    // toggleForms()
 })
 
 loadTableEntries();

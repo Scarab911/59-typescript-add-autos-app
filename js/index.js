@@ -102,10 +102,13 @@ function saveCarToLocalStorage() {
     window.localStorage.setItem(CARS_LOCAL_STORAGE_KEY, carsString);
 }
 //togles between two forms:
-function toggleForms() {
+let editableId = 0;
+function toggleForms(id) {
     var _a, _b;
     (_a = UI.addForm) === null || _a === void 0 ? void 0 : _a.classList.toggle('show');
     (_b = UI.updateForm) === null || _b === void 0 ? void 0 : _b.classList.toggle('show');
+    editableId = id;
+    console.log('editinam:', editableId);
 }
 //remove entry from table
 function deleteEntry(id) {
@@ -158,6 +161,22 @@ let id = 0;
 });
 //Uzdedam Event formos atnaujinimo mygtukui
 (_b = UI.updateButton) === null || _b === void 0 ? void 0 : _b.addEventListener('click', () => {
-    toggleForms();
+    const modelUpdateInput = document.getElementById('update-model');
+    const dateUpdateInput = document.getElementById('update-date');
+    const colorUpdateInput = document.getElementById('update-color');
+    const fuelUpdateInput = document.getElementById('update-fuel');
+    for (const car of autosList) {
+        if (car.id === editableId) {
+            modelUpdateInput.value === '' ? car.model : car.model = modelUpdateInput.value;
+            dateUpdateInput.value === '' ? car.date : car.date = new Date(dateUpdateInput.value);
+            colorUpdateInput.value === '' ? car.color : car.color = colorUpdateInput.value;
+            fuelUpdateInput.value === '' ? car.fuel : car.fuel = fuelUpdateInput.value;
+        }
+    }
+    //ikeliam sukurtus auto i LOCAL Storage:
+    saveCarToLocalStorage();
+    //ipiesiam nauja auto i HTML lentele
+    renderEntries(UI.tableBody);
+    // toggleForms()
 });
 loadTableEntries();
