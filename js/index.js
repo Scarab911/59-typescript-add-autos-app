@@ -30,21 +30,8 @@ var FuelType;
 })(FuelType || (FuelType = {}));
 class CarPark {
     //ad cars to list
-    addCar(car) {
+    static addCar(car) {
         autosList.push(car);
-    }
-    whatIsThisFuel(fuel) {
-        let thisFuel = FuelType.Benzinas;
-        if (fuel === '0') {
-            thisFuel = FuelType.Benzinas;
-        }
-        if (fuel === '1') {
-            thisFuel = FuelType.Dyzelinas;
-        }
-        if (fuel === '2') {
-            thisFuel = FuelType.Elektra;
-        }
-        return thisFuel;
     }
 }
 //sukuriam automibiliu objekta
@@ -66,13 +53,13 @@ class Car {
         const formatedDate = formatDate(apkarpytas);
         if (element) {
             element.innerHTML += `<tr class="table-row">
-                            <td data-label="Modelis">${this.model}</td>
-                            <td data-label="Pagaminimo data">${formatedDate}</td>
-                            <td data-label="Spalva">${this.color}</td>
-                            <td data-label="Kuro tipas">${this.fuel}</td>
-                            <td><img src="./img/edit.png" alt="edit" id="editPick" onClick="toggleForms(${this._id})"></td>
-                            <td><img src="./img/delet.png" alt="delete" id="deletePick" onClick="deleteEntry(${this._id})"></td>
-                        </tr>`;
+                                    <td data-label="Modelis">${this.model}</td>
+                                    <td data-label="Pagaminimo data">${formatedDate}</td>
+                                    <td data-label="Spalva">${this.color}</td>
+                                    <td data-label="Kuro tipas">${this.fuel}</td>
+                                    <td><img src="./img/edit.png" alt="edit" id="editPick" onClick="toggleForms(${this._id})"></td>
+                                    <td><img src="./img/delet.png" alt="delete" id="deletePick" onClick="deleteEntry(${this._id})"></td>
+                                </tr>`;
         }
     }
 }
@@ -134,7 +121,6 @@ function filter(type) {
 }
 /*EXECUTION BELOW*/
 // sukuriam nauja auto parka
-const srotas = new CarPark;
 let autosList = [];
 let id = 0;
 //uzdedam eventa formos ivedimo mygtukui
@@ -143,11 +129,9 @@ let id = 0;
     const date = UI.dateInput.value;
     const color = UI.colorInput.value;
     const fuel = UI.fuelInput.value;
-    //susirandam kuro tipa arba panaudojam castinima as KuroTipas
-    const thisFuel = srotas.whatIsThisFuel(fuel);
     //pridedam automobili i list
     const car = new Car(model, new Date(date), color, fuel, ++id);
-    srotas.addCar(car);
+    CarPark.addCar(car);
     //ipiesiam nauja auto i HTML lentele
     renderEntries(UI.tableBody);
     //ikeliam sukurtus auto i LOCAL Storage:
@@ -171,6 +155,7 @@ let id = 0;
     saveCarToLocalStorage();
     //ipiesiam nauja auto i HTML lentele
     renderEntries(UI.tableBody);
-    // toggleForms()
+    toggleForms();
+    alert('Entry updated succesfuly');
 });
 loadTableEntries();

@@ -32,28 +32,10 @@ enum FuelType {
 
 class CarPark{
     //ad cars to list
-    addCar(car: Car): void {
+    public static addCar(car: Car): void {
         autosList.push(car);
     }
-
-    whatIsThisFuel(fuel: string): FuelType {
-        let thisFuel: FuelType = FuelType.Benzinas;
-
-        if (fuel === '0') {
-            thisFuel = FuelType.Benzinas;
-        }
-
-        if (fuel === '1') {
-            thisFuel = FuelType.Dyzelinas;
-        } 
-        
-        if (fuel === '2') {
-            thisFuel = FuelType.Elektra;
-        }
-        return thisFuel
-    }
 }
-
 
 //sukuriam automibiliu objekta
 class Car {
@@ -84,13 +66,13 @@ class Car {
         if (element) {
             
             element.innerHTML += `<tr class="table-row">
-                            <td data-label="Modelis">${this.model}</td>
-                            <td data-label="Pagaminimo data">${formatedDate}</td>
-                            <td data-label="Spalva">${this.color}</td>
-                            <td data-label="Kuro tipas">${this.fuel}</td>
-                            <td><img src="./img/edit.png" alt="edit" id="editPick" onClick="toggleForms(${this._id})"></td>
-                            <td><img src="./img/delet.png" alt="delete" id="deletePick" onClick="deleteEntry(${this._id})"></td>
-                        </tr>`;
+                                    <td data-label="Modelis">${this.model}</td>
+                                    <td data-label="Pagaminimo data">${formatedDate}</td>
+                                    <td data-label="Spalva">${this.color}</td>
+                                    <td data-label="Kuro tipas">${this.fuel}</td>
+                                    <td><img src="./img/edit.png" alt="edit" id="editPick" onClick="toggleForms(${this._id})"></td>
+                                    <td><img src="./img/delet.png" alt="delete" id="deletePick" onClick="deleteEntry(${this._id})"></td>
+                                </tr>`;
         }
     }
 }
@@ -179,7 +161,6 @@ function filter(type:string){
 /*EXECUTION BELOW*/
 
 // sukuriam nauja auto parka
-const srotas = new CarPark;
 let autosList: Car[] = [];
 let id = 0;
 
@@ -190,12 +171,10 @@ UI.addButton?.addEventListener('click', () => {
     const date = UI.dateInput.value;
     const color = UI.colorInput.value;
     const fuel = UI.fuelInput.value;
-    //susirandam kuro tipa arba panaudojam castinima as KuroTipas
-    const thisFuel = srotas.whatIsThisFuel(fuel);
 
     //pridedam automobili i list
     const car = new Car(model, new Date(date), color, fuel as FuelType, ++id);
-    srotas.addCar(car)
+    CarPark.addCar(car)
 
     //ipiesiam nauja auto i HTML lentele
     renderEntries(UI.tableBody);
@@ -226,7 +205,8 @@ UI.updateButton?.addEventListener('click', () => {
     //ipiesiam nauja auto i HTML lentele
     renderEntries(UI.tableBody);
 
-    // toggleForms()
+    toggleForms()
+    alert('Entry updated succesfuly');
 })
 
 loadTableEntries();
