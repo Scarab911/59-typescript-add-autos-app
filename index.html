@@ -13,7 +13,7 @@
 <body>
     <div class="main-container">
         <div class="forms-container">
-            <form class="add-form show">
+            <form class="add-form show" id="add-form">
 
                 <label for="model">Modelis</label>
                 <input id="model" type="text">
@@ -35,24 +35,25 @@
 
             </form>
 
-            <form class="update-form hide">
-                <label for="model">Modelis</label>
-                <input id="model" type="text">
+            <form class="update-form" id="update-form">
 
-                <label for="date">Pagaminimo data</label>
-                <input id="date" type="date" min="2010-01-01">
+                <label for="update-model">Modelis</label>
+                <input id="update-model" type="text">
 
-                <label for="color">Spalva</label>
-                <input id="color" type="color">
+                <label for="update-date">Pagaminimo data</label>
+                <input id="update-date" type="date" min="2010-01-01">
 
-                <label for="fuel">Kuro tipas</label>
-                <select id="fuel" name="fuel">
+                <label for="update-color">Spalva</label>
+                <input id="update-color" type="text">
+
+                <label for="update-fuel">Kuro tipas</label>
+                <select id="update-fuel" name="fuel">
                     <option value="0">Benzinas</option>
                     <option value="1">Dyzelinas</option>
                     <option value="2">Elektra</option>
                 </select>
 
-                <input type="button" id="add-btn" class="btn" id="btn-add" value="Atnaujinti"></input>
+                <input type="button" id="update-btn" class="btn" value="Atnaujinti"></input>
             </form>
         </div>
 
@@ -66,22 +67,24 @@
 
             <div class="table-wrapper">
                 <table class="output-table">
-                    <tr class="table-row table-heading">
+                    <thead class="table-row table-heading">
                         <th>Modelis</th>
                         <th>Pagaminimo data</th>
                         <th>Spalva</th>
                         <th>Kuro tipas</th>
                         <th></th>
                         <th></th>
-                    </tr>
-                    <!-- <tr class="table-row">
+                    </thead>
+                    <tbody id="table-body">
+                        <!-- <tr class="table-row">
                         <td data-label="Modelis">Audi Q8</td>
                         <td data-label="Pagaminimo data">2015</td>
                         <td data-label="Spalva">Black</td>
                         <td data-label="Kuro tipas">Benzinas</td>
                         <td><img src="./img/edit.png" alt="edit"></td>
                         <td><img src="./img/delet.png" alt="delete"></td>
-                    </tr> -->
+                            </tr> -->
+                    </tbody>
                 </table>
             </div>
         </div>

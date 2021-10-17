@@ -12,7 +12,7 @@ body {
   font-weight: 700;
 }
 
-form.hide {
+form {
   display: none;
 }
 
@@ -29,7 +29,7 @@ form.hide {
   padding: 10px;
 }
 
-form {
+form.show {
   display: flex;
   flex-direction: column;
   min-width: 300px;
@@ -132,6 +132,9 @@ td img {
   cursor: pointer;
   border-radius: 8px;
   border: solid 1px var(--clr-secondary);
+}
+td img:hover {
+  border: solid 2px var(--clr-secondary);
 }
 th {
   width: fit-content;

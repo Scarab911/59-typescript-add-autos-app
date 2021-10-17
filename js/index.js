@@ -1,12 +1,17 @@
 "use strict";
-var _a;
+var _a, _b;
 const UI = {
     modelInput: document.getElementById('model'),
     dateInput: document.getElementById('date'),
     colorInput: document.getElementById('color'),
     fuelInput: document.getElementById('fuel'),
     addButton: document.getElementById('btn_add'),
-    tableRow: document.querySelector('.table-row'),
+    editButton: document.getElementById('editPick'),
+    deleteButton: document.getElementById('deletePick'),
+    updateButton: document.getElementById('update-btn'),
+    tableBody: document.getElementById('table-body'),
+    updateForm: document.getElementById('update-form'),
+    addForm: document.getElementById('add-form')
 };
 //apsirasom galimus kuro variantus
 var FuelType;
@@ -22,13 +27,13 @@ class CarPark {
     }
     whatIsThisFuel(fuel) {
         let thisFuel = FuelType.Benzinas;
-        if (fuel === 'Benzinas') {
+        if (fuel === '0') {
             thisFuel = FuelType.Benzinas;
         }
-        if (fuel === 'Dyzelinas') {
+        if (fuel === '1') {
             thisFuel = FuelType.Dyzelinas;
         }
-        if (fuel === 'Elektra') {
+        if (fuel === '2') {
             thisFuel = FuelType.Elektra;
         }
         return thisFuel;
@@ -36,43 +41,82 @@ class CarPark {
 }
 //sukuriam automibiliu objekta
 class Car {
-    constructor(model, date, color, fuel) {
+    constructor(model, date, color, fuel, id) {
         this.model = model,
             this.date = date,
             this.color = color,
-            this.fuel = fuel;
+            this.fuel = fuel,
+            this._id = id;
+    }
+    get id() {
+        return this._id;
     }
     printCarToHTML(element) {
+        //formatuojam data
         const stringyfiedDate = JSON.stringify(this.date);
         const apkarpytas = stringyfiedDate.substring(1, stringyfiedDate.length - 1);
         const formatedDate = formatDate(apkarpytas);
-        let HTML = '';
-        HTML += `<tr class="table-row">
-                        <td data-label="Modelis">${this.model}</td>
-                        <td data-label="Pagaminimo data">${formatedDate}</td>
-                        <td data-label="Spalva">${this.color}</td>
-                        <td data-label="Kuro tipas">${this.fuel}</td>
-                        <td><img src="./img/edit.png" alt="edit"></td>
-                        <td><img src="./img/delet.png" alt="delete"></td>
-                    </tr>`;
-        element.insertAdjacentHTML('afterend', HTML);
+        if (element) {
+            element.innerHTML += `<tr class="table-row">
+                            <td data-label="Modelis">${this.model}</td>
+                            <td data-label="Pagaminimo data">${formatedDate}</td>
+                            <td data-label="Spalva">${this.color}</td>
+                            <td data-label="Kuro tipas">${this.fuel}</td>
+                            <td><img src="./img/edit.png" alt="edit" id="editPick" onClick="toggleForms(${this._id})"></td>
+                            <td><img src="./img/delet.png" alt="delete" id="deletePick" onClick="deleteEntry(${this._id})"></td>
+                        </tr>`;
+        }
     }
 }
-/*HELPERS FUNCTIONS*/
+/*HELPER FUNCTIONS*/
+//formats date
 function formatDate(date) {
     const d = new Date(date);
     const dformat = [d.getFullYear(), d.getMonth() + 1, d.getDate()].join('-');
     return dformat;
 }
-function renderHTML(element) {
+//render HTML from Array of objects
+function renderEntries(element) {
+    element.innerHTML = '';
     for (const car of autosList) {
         car.printCarToHTML(element);
+    }
+}
+//Saves info into LocalStorage
+const CARS_LOCAL_STORAGE_KEY = 'Cars';
+function saveCarToLocalStorage() {
+    const carsString = JSON.stringify(autosList);
+    window.localStorage.setItem(CARS_LOCAL_STORAGE_KEY, carsString);
+}
+//togles between two forms:
+function toggleForms() {
+    var _a, _b;
+    (_a = UI.addForm) === null || _a === void 0 ? void 0 : _a.classList.toggle('show');
+    (_b = UI.updateForm) === null || _b === void 0 ? void 0 : _b.classList.toggle('show');
+}
+//remove entry from table
+function deleteEntry(id) {
+    autosList = autosList.filter((car) => car._id !== id);
+    renderEntries(UI.tableBody);
+    saveCarToLocalStorage();
+}
+//uzkrauna sarasa is Local Storage
+function loadTableEntries() {
+    const localCarsList = window.localStorage.getItem(CARS_LOCAL_STORAGE_KEY);
+    if (!localCarsList)
+        return;
+    const parsedCarsList = JSON.parse(localCarsList);
+    console.log('istraukiam is local storage');
+    console.log(localCarsList);
+    console.log(parsedCarsList);
+    for (const car of parsedCarsList) {
     }
 }
 /*EXECUTION BELOW*/
 // sukuriam nauja auto parka
 const srotas = new CarPark;
-const autosList = [];
+let autosList = [];
+let id = 0;
 //uzdedam eventa formos ivedimo mygtukui
 (_a = UI.addButton) === null || _a === void 0 ? void 0 : _a.addEventListener('click', () => {
     const model = UI.modelInput.value;
@@ -82,14 +126,16 @@ const autosList = [];
     //susirandam kuro tipa arba panaudojam castinima as KuroTipas
     const thisFuel = srotas.whatIsThisFuel(fuel);
     //pridedam automobili i list
-    const car = new Car(model, new Date(date), color, thisFuel);
+    const car = new Car(model, new Date(date), color, thisFuel, ++id);
     srotas.addCar(car);
+    console.log(autosList);
     //ipiesiam nauja auto i HTML lentele
-    car.printCarToHTML(UI.tableRow);
+    renderEntries(UI.tableBody);
     //ikeliam sukurtus auto i LOCAL Storage:
-    saveCar();
+    saveCarToLocalStorage();
 });
-function saveCar() {
-    const carsString = JSON.stringify(autosList);
-    window.localStorage.setItem('CARS_LOCAL_STORAGE_KEY', carsString);
-}
+//Uzdedam Event formos atnaujinimo mygtukui
+(_b = UI.updateButton) === null || _b === void 0 ? void 0 : _b.addEventListener('click', () => {
+    toggleForms();
+});
+loadTableEntries();
