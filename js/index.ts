@@ -165,12 +165,29 @@ let autosList: Car[] = [];
 let id = 0;
 
 //uzdedam eventa formos ivedimo mygtukui
-UI.addButton?.addEventListener('click', () => {
+UI.addButton?.addEventListener('click', (e) => {
+    e.preventDefault();
 
     const model = UI.modelInput.value;
     const date = UI.dateInput.value;
     const color = UI.colorInput.value;
     const fuel = UI.fuelInput.value;
+
+    //Validations
+    if (model === '' ||
+        isFinite(+model)) {
+        console.error('ERROR: Please enter model name!');
+        return
+    }
+    if (date === '' ) {
+        console.error('ERROR: Please enter full date!');
+        return
+    }
+    if (color === '' ||
+        isFinite(+color)) {
+        console.error('ERROR: Please enter color as text without numbers!');
+        return
+    }
 
     //pridedam automobili i list
     const car = new Car(model, new Date(date), color, fuel as FuelType, ++id);

@@ -16,13 +16,13 @@
             <form class="add-form show" id="add-form">
 
                 <label for="model">Modelis</label>
-                <input id="model" type="text">
+                <input id="model" type="text" required>
 
                 <label for="date">Pagaminimo data</label>
-                <input id="date" type="date" min="2010-01-01" required pattern="\y{4}-\m{2}-\d{2}">
+                <input id="date" type="date" min="2010-01-01" required>
 
                 <label for="color">Spalva</label>
-                <input id="color" type="text">
+                <input id="color" type="text" required>
 
                 <label for="fuel">Kuro tipas</label>
                 <select id="fuel" name="fuel">
@@ -31,7 +31,7 @@
                     <option value="Elektra">Elektra</option>
                 </select>
 
-                <input type="button" class="btn" id="btn_add" value="Prideti"></input>
+                <input type="submit" class="btn" id="btn_add" value="Prideti"></input>
 
             </form>
 
@@ -53,12 +53,12 @@
                     <option value="Elektra">Elektra</option>
                 </select>
 
-                <input type="button" id="update-btn" class="btn" value="Atnaujinti"></input>
+                <input type="submit" id="update-btn" class="btn" value="Atnaujinti"></input>
             </form>
         </div>
 
-
         <div class="info-wrapper">
+
             <nav>
                 <a href="#" id="show-all" class="all-auto" onclick="filter('')">Visi automobiliai</a>
                 <a href="#" id="show-dyzel" class="dyzel-auto" onclick="filter('Dyzelinas')">Dyzeliniai</a>
