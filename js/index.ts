@@ -215,7 +215,8 @@ UI.updateButton?.addEventListener('click', () => {
            fuelUpdateInput.value === ''? car.fuel: car.fuel = fuelUpdateInput.value as FuelType;
         }
     }
-
+    const index: number|undefined = editableId;
+    autosList[index-1]: 
     //ikeliam sukurtus auto i LOCAL Storage:
     saveCarToLocalStorage();
 
